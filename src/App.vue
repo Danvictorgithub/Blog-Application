@@ -1,14 +1,12 @@
 <script setup>
+  import Header from "./components/Header.vue";
 </script>
 
 <template>
+  <Header title="Leeman Tech Blog"/>
   <div class="wrapper">
-    <header>
-    <h1>Blog Application</h1>
-    </header>
   </div>
 </template>
-
 <style scoped>
   .wrapper {
     flex: 1 0 auto;
