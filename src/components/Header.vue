@@ -32,6 +32,11 @@
 		gap:48px;
 		list-style:none;
 		padding: 0;
+
+		transition-property: display;
+		transition-duration: 0.5s;
+		transition-timing-function: ease-out;
+		transition-delay: 0.25s;
 	}
 	header ul a{
 		width:100%;
@@ -70,6 +75,7 @@
 		}
 		.on {
 			display:none;
+			opacity:0;
 		}
 		.menuDrawer {
 			background-color:white;
