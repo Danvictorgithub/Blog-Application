@@ -6,4 +6,5 @@
   flex-direction: column;
   height:100%;
   font-weight: normal;
+  position: relative;
 }
