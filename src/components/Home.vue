@@ -17,6 +17,17 @@
 			</div>
 			<img class="heroImg" src="../assets/steve.jpg">
 		</div>
+		<main>
+			<h2>Recently Uploaded Blogs:</h2>
+			<div class="recentBlog">
+				<div v-for="i in [5,4,3,2,1]" class="blogCard">
+					<img src="../assets/sampleBlogImage.png">
+					<h1>Lorem Ipsum dolor sit amet consectetur</h1>
+					<p>Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro.</p>
+				</div>
+			</div>
+		</main>
+		
 	</section>
 </template>
 <style scoped>
@@ -53,7 +64,7 @@
 	.blogHeroInfo article h2{
 		font-size:2rem;
 		font-weight:bold;
-		color: white;
+		color: hsl(168, 42%, 57%);
 	}
 	.blogHeroInfo article p {
 		font-size:1.25rem;
@@ -67,15 +78,24 @@
 		font-weight: bold;
 		color:var(--matte-black);
 	}
-	.wrapper {
-		flex: 1 0 auto;
-		max-width: 1280px;
-  }
-	.container {
-		width:100%;
-		margin: 0 auto;
-		background-color: white;
+	main {
+		padding: 24px 48px;
 	}
+	main h2 {
+		font-size:2rem;
+		margin-bottom:24px;
+	}
+	.recentBlog {
+		display:grid;
+		grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+		gap:24px;
+	}
+	.blogCard img {
+		width:100%;
+		height:250px;
+		object-fit:cover;
+	}
+
 	@media (max-width:768px) {
 		.blogHeroInfo {
 			grid-template-columns: 1fr;
@@ -86,5 +106,15 @@
 			grid-column: 0 / 1;
 			grid-row: 2 / 3;
 		}
+	}
+	.wrapper {
+		flex: 1 0 auto;
+		max-width: 1280px;
+  	}			
+	.container {
+		width:100%;
+		margin: 0 auto;
+		background-color: white;
+/*		box-shadow:2px 0px 24px black;*/
 	}
 </style>

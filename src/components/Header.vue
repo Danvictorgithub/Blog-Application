@@ -8,7 +8,7 @@
 </script>
 <template>
 	<header>
-		<h1>{{title || "Blog Application"}}</h1>
+		<h1><img class="icon" src="favicon.png">{{title || "Blog Application"}}</h1>
 		<button @click="menuToggle = !menuToggle" class="hideToggle menuDrawer"><img class="drawerIcon" src="./icons/nav-drawer-icon.png" alt="Button"></button>
 		<ul :class="{on:menuToggle}" class="authButtons">
 			<a href=""><li>Login</li></a>
@@ -17,6 +17,9 @@
 	</header>
 </template>
 <style scoped>
+	.icon {
+		height: 100%;
+	}
 	header {
 		padding-inline: 24px;
 		display:flex;
@@ -24,7 +27,15 @@
 		align-items:center;
 		height:75px;
 		background-color:white;
-		border-bottom: 2px solid black;
+		border-bottom: 2px solid lightgray;
+		z-index: 1;
+	}
+	header h1 {
+		height:100%;
+		display:flex;
+		align-items:center;
+		padding:4px;
+		gap:12px;
 	}
 	header ul {
 		display:flex;
