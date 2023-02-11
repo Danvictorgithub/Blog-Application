@@ -1,5 +1,6 @@
 :root {
   --matte-black:#252525;
+  --main-color:hsl(168, 42%, 57%);
 }
 *,
 *::before,

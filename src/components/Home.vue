@@ -64,19 +64,35 @@
 	.blogHeroInfo article h2{
 		font-size:2rem;
 		font-weight:bold;
-		color: hsl(168, 42%, 57%);
+		color: var(--main-color);
 	}
 	.blogHeroInfo article p {
 		font-size:1.25rem;
 		margin-bottom:12px;
 	}
 	.blogHeroInfo article button {
-		background-color:white;
-		border:2px solid transparent;
+/*		background-color:white;*/
+/*		color:var(--matte-black);*/
+/*		border:4px solid transparent;*/
 		font-size:1.5rem;
 		padding:20px 40px;
 		font-weight: bold;
+		background-color: transparent;
+		color: white;
+		border:4px solid var(--main-color);
+	}
+	.blogHeroInfo article button:hover {
+		background-color: var(--main-color);
+		color:white;
+	}
+	.blogHeroInfo article button:active {
+		/*background-color: transparent;
+		color: white;
+		border:4px solid var(--main-color);*/
+
+		background-color:white;
 		color:var(--matte-black);
+		border:4px solid transparent;
 	}
 	main {
 		padding: 24px 48px;
