@@ -1,8 +1,17 @@
 <script setup>
-	
+	import {ref, onMounted} from 'vue';
+	const isLoaded = ref(false);
+	onMounted(()=> {
+		document.onreadystatechange = () => {
+			if(document.readyState == "complete") {
+				isLoaded.value = true;
+			}
+		}
+	});
 </script>
 <template>
-	<section class="wrapper container">
+	<div class="loading" v-if="!isLoaded"><img class="rotate" src="favicon.png" alt="logo"></div>
+	<section class="wrapper container" v-else>
 		<div class="homeHero">
 			<div class="gradient">
 				<section class="blogHeroInfo">
@@ -27,7 +36,6 @@
 				</div>
 			</div>
 		</main>
-		
 	</section>
 </template>
 <style scoped>
@@ -132,5 +140,37 @@
 		margin: 0 auto;
 		background-color: white;
 /*		box-shadow:2px 0px 24px black;*/
+	}
+	.loading {
+		position:absolute;
+		height:100%;
+		width:100%;
+		background-color:lightgray;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		z-index:999;
+	}
+	.rotate {
+	  animation: rotation 2s infinite linear;
+	}
+	@media (max-width:600px) {
+		.recentBlog {
+			grid-template-columns:1fr;
+		}
+		main {
+			padding: 12px 3vw;
+		}
+		.blogCard img {
+			height:calc(225px);
+		}
+	}
+	@keyframes rotation {
+	  from {
+	    transform: rotate(0deg);
+	  }
+	  to {
+	    transform: rotate(359deg);
+	  }
 	}
 </style>

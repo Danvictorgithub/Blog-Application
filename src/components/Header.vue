@@ -62,6 +62,13 @@
 		display:none;
 	}
 	@media (max-width:600px) {
+		header {
+			padding-inline: 12px;
+			font-size:0.8rem;
+		}
+		header h1 {
+			letter-spacing:1px;
+		}
 		header ul {
 			width:100%;
 			height:125px;
