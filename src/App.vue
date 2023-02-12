@@ -1,12 +1,13 @@
 <script setup>
+  import {RouterView } from 'vue-router';
+  import { ref, watch} from 'vue';
   import Header from "./components/Header.vue";
-  import Home from "./components/Home.vue";
   import Footer from "./components/Footer.vue";
+  const blogData = ref();
 </script>
-
 <template>
   <Header title="Leeman Tech Blog"/>
-  <Home/>
+  <RouterView/>
   <Footer/>
 </template>
 <style scoped>

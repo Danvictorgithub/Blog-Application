@@ -26,8 +26,9 @@
 		justify-content:space-between;
 		align-items:center;
 		height:75px;
+		width:100%;
 		background-color:white;
-		border-bottom: 2px solid lightgray;
+		border-bottom: 1px solid lightgray;
 		z-index: 1;
 	}
 	header h1 {
@@ -36,6 +37,8 @@
 		align-items:center;
 		padding:4px;
 		gap:12px;
+		letter-spacing:2px;
+		text-transform:uppercase;
 	}
 	header ul {
 		display:flex;

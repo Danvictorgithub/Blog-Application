@@ -14,7 +14,7 @@
 		display:flex;
 		justify-content:center;
 		align-items:center;
-		border-top:2px solid lightgray;
+		border-top:1px solid lightgray;
 		gap:12px;
 	}
 	footer img {
