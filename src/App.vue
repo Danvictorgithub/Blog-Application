@@ -6,7 +6,7 @@
 </script>
 <template>
   <Header title="Leeman Tech Blog"/>
-  <RouterView />
+  <RouterView/>
   <Footer/>
 </template>
 <style scoped>

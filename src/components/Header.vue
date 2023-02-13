@@ -8,7 +8,7 @@
 </script>
 <template>
 	<header>
-		<h1><img class="icon" src="favicon.png">{{title || "Blog Application"}}</h1>
+		<h1><img class="icon" src="favicon2.png">{{title || "Blog Application"}}</h1>
 		<button @click="menuToggle = !menuToggle" class="hideToggle menuDrawer"><img class="drawerIcon" src="./icons/nav-drawer-icon.png" alt="Button"></button>
 		<ul :class="{on:menuToggle}" class="authButtons">
 			<a href=""><li>Login</li></a>

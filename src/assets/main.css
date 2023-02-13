@@ -8,3 +8,13 @@
   font-weight: normal;
   position: relative;
 }
+.wrapper {
+    flex: 1 0 auto;
+    max-width: 1280px;
+    }     
+.container {
+width:100%;
+margin: 0 auto;
+background-color: white;
+/*    box-shadow:2px 0px 24px black;*/
+}

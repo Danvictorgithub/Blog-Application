@@ -131,16 +131,6 @@
 			grid-row: 2 / 3;
 		}
 	}
-	.wrapper {
-		flex: 1 0 auto;
-		max-width: 1280px;
-  	}			
-	.container {
-		width:100%;
-		margin: 0 auto;
-		background-color: white;
-/*		box-shadow:2px 0px 24px black;*/
-	}
 	.loading {
 		position:absolute;
 		height:100%;
