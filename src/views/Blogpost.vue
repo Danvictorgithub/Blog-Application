@@ -15,9 +15,9 @@
 </template>
 <style scoped>
 .wrapper-blog {
-	margin-inline: 100px auto;
+	margin-inline: auto auto;
 	flex:1 0 auto;
-	max-width: 1280px;
+	max-width: calc(1280px - 120px);
 /*	background-color:lightgray;*/
 }
 .blogPostImg {
@@ -26,19 +26,33 @@
 	object-fit:cover;
 }
 .blogTitle {
-	padding: 48px 36px;
-	font-size: 5rem;
+	text-align:center;
+	padding: 48px 40px;
+	font-size: 3rem;
 	font-weight: 600;
 	letter-spacing: 2px;
+	line-height: 2ch;
 }
 .blogContent {
-	padding: 60px 64px;
-	font-size:2rem;
+	padding: 30px 10vw;
+	font-size:1.5rem;
 }
-@media (max-width:1280px){
+.blogContent::first-letter {
+	font-size:3rem;
+	margin-left: 2px;
+}
+@media (max-width:1200px){
+	.blogTitle {
+		font-size:2.5rem;
+	}
 	.wrapper-blog {
 		margin-inline: auto;
 /*		background-color:red;*/
+	}
+}
+@media (max-width: 600px) {
+	.blogTitle {
+		font-size:2rem;
 	}
 }
 </style>

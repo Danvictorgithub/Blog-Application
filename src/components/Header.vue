@@ -55,7 +55,7 @@
 	header ul a{
 		width:100%;
 		text-decoration:none;
-		color:black;
+		color:var(--matte-black);
 		font-size: 1.5rem;
 	}
 	.hideToggle {
@@ -79,16 +79,17 @@
 			top:75px;
 			left:0;
 			gap:0;
-			background-color:black;
+			background-color: rgb(224, 224, 224,0.9);
+			border-radius: 0  0 5% 5%;
 		}
 		header ul a {
 			flex: 1 0 auto;
 			display:flex;
 			justify-content:center;
 			align-items:center;
-			color:white;
-			font-weight:800;
-			font-size:1.25rem;
+			color:var(--matte-black);
+/*			font-weight:800;*/
+/*			font-size:1.25rem;*/
 			border-bottom:2px solid white;
 		}
 		.hideToggle {
@@ -109,8 +110,16 @@
 			width: 100%;
 			max-width: 65px;
 			height: auto;
+			border-radius:100%;
+			background-color:white;
 	/*		position:relative;*/
 	/*		height:inherit;*/
+		}
+		.drawerIcon:hover {
+			background-color:lightgray;
+		}
+		.drawerIcon:active {
+			background-color:gray;
 		}
 	}
 </style>
