@@ -10,7 +10,7 @@
 	});
 </script>
 <template>
-	<div class="loading" v-if="!isLoaded"><img class="rotate" src="favicon.png" alt="logo"></div>
+	<div class="loading" v-if="!isLoaded"><img class="rotate" src="/favicon.png" alt="logo"></div>
 	<section class="wrapper container" v-else>
 		<div class="homeHero">
 			<div class="gradient">
@@ -29,7 +29,7 @@
 		<main>
 			<h2>Recently Uploaded Blogs:</h2>
 			<div class="recentBlog">
-				<div v-for="i in [5,4,3,2,1]" class="blogCard">
+				<div v-for="i in [5,4,3,2,1]" v-bind:key={i} class="blogCard">
 					<img src="../assets/sampleBlogImage.png">
 					<h1>Lorem Ipsum dolor sit amet consectetur</h1>
 					<p>Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro.</p>
