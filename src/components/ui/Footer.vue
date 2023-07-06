@@ -1,9 +1,9 @@
 <script setup>
-	
+
 </script>
 <template>
 	<footer>
-		<img src="../assets/GitHub-Mark.png" alt="Github Logo">
+		<img src="../../assets/GitHub-Mark.png" alt="Github Logo">
 		<h2>Made By: Danvictorgithub</h2>
 	</footer>
 </template>

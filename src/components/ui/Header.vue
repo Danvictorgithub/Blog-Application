@@ -1,24 +1,26 @@
 <script setup>
 	import {ref} from 'vue';
-	const drawerIcon = '/icons/nav-drawer-icon.png';
+	import { RouterLink } from 'vue-router';
+	const drawerIcon = '../icons/nav-drawer-icon.png';
 	const props = defineProps({
 		title:String,
+		hide:{type:Boolean,default:false},
 	})
 	const menuToggle = ref('false');
 </script>
 <template>
 	<header>
-		<h1><img class="icon" src="/favicon.png">{{title || "Blog Application"}}</h1>
-		<button @click="menuToggle = !menuToggle" class="hideToggle menuDrawer"><img class="drawerIcon" src="./icons/nav-drawer-icon.png" alt="Button"></button>
-		<ul :class="{on:menuToggle}" class="authButtons">
-			<a href=""><li>Login</li></a>
-			<a href=""><li>Signup</li></a>
+		<h1><RouterLink to="/"><img class="icon" src="/favicon.png">{{title || "Blog Application"}}</RouterLink></h1>
+		<button v-if="!hide" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer"><img class="drawerIcon" src="./icons/nav-drawer-icon.png" alt="Button"></button>
+		<ul v-if="!hide" :class="{on:menuToggle}" class="authButtons">
+			<RouterLink to="login">Login</RouterLink>
+			<RouterLink to="signup">Signup</RouterLink>
 		</ul>
 	</header>
 </template>
 <style scoped>
 	.icon {
-		height: 100%;
+		width: 65px;
 	}
 	header {
 		padding-inline: 24px;
@@ -31,7 +33,7 @@
 		border-bottom: 1px solid lightgray;
 		z-index: 1;
 	}
-	header h1 {
+	header h1 a{
 		height:100%;
 		display:flex;
 		align-items:center;
@@ -39,6 +41,8 @@
 		gap:12px;
 		letter-spacing:2px;
 		text-transform:uppercase;
+		text-decoration: none;
+		color:var(--matte-black)
 	}
 	header ul {
 		display:flex;

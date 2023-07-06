@@ -2,6 +2,7 @@ import {createRouter,createWebHistory} from 'vue-router';
 import HomeView from '../views/Home.vue';
 import Blogpost from '../views/Blogpost.vue';
 import notFound from '../views/404.vue';
+import Login from '../views/Login.vue';
 const routes = [
 	{
 		path:'/',
@@ -9,14 +10,19 @@ const routes = [
 		component: HomeView
 	},
 	{
-		path:'/:pathMatch(.*)*',
-		name:'404',
-		component:notFound
-	},
-	{
 		path:'/blogPost',
 		name:'blogPost',
 		component:Blogpost
+	},
+	{
+		path:'/login',
+		name:'login',
+        component:Login
+	},
+	{
+		path:'/:pathMatch(.*)*',
+		name:'404',
+		component:notFound
 	},
 ];
 const router = createRouter({

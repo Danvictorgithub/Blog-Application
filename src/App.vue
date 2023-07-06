@@ -1,13 +1,24 @@
 <script setup>
   import {RouterView} from 'vue-router';
-  import { useAuthenticationStore } from './data/state';
-  import Header from "./components/ui/Header.vue";
-  import Footer from "./components/ui/Footer.vue";
 </script>
 <template>
-  <Header title="Leeman Tech Blog"/>
   <RouterView/>
-  <Footer/>
 </template>
 <style scoped>
 </style>
+<!-- Todo:
+  UI:
+    Create Login Form /
+    Create SignUp Form
+    Create WYSIWYG
+    Create Like Form
+    Create Comment Form
+  API:
+    Implement Authentication
+    Create Index
+    Create Show
+    Create New
+    Create Create
+    Create Edit
+    Create Update
+    Create Delete -->

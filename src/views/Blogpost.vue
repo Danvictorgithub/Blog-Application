@@ -1,7 +1,9 @@
 <script setup>
-	
+	import Header from '../components/ui/Header.vue';
+	import Footer from '../components/ui/Footer.vue';
 </script>
 <template>
+	<Header title="Leeman Tech Blog"/>
 	<section class="wrapper-blog container">
 		<div class="blogMetaData">
 			<h2 class="blogAuthor">By: Some User</h2>
@@ -12,7 +14,7 @@
 			<img class="blogPostImg" src="../assets/blogPostImage.jpg">
 		</div>
 		<div class="blogContent">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit! 
+			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
@@ -35,6 +37,7 @@
 			</article>
 		</section>
 	</section>
+	<Footer/>
 </template>
 <style scoped>
 .wrapper-blog {

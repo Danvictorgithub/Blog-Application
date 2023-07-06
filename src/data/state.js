@@ -1,6 +1,26 @@
 import { defineStore } from "pinia";
-
-export const useAuthenticationStore = defineStore(
+const useLoading = defineStore(
+    "Loading",
+    {
+        state: () => ({
+            isLoading: false
+        }),
+        actions: {
+            setIsLoading (boolean) {
+                this.isLoading = boolean;
+            }
+        }
+    }
+);
+const useAPI = defineStore(
+    "API",
+    {
+        state: () => ({
+            API: "https://localhost:5454/api/"
+        })
+    }
+);
+const useAuthenticationStore = defineStore(
     "AuthenticationStore",
     {
         state: () => (
@@ -13,4 +33,6 @@ export const useAuthenticationStore = defineStore(
             }
         }
     }
-    );
+);
+
+export { useLoading, useAPI, useAuthenticationStore };

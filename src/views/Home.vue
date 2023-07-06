@@ -1,16 +1,21 @@
 <script setup>
 	import {ref, onMounted} from 'vue';
-	const isLoaded = ref(false);
+	import {useLoading} from "../data/state";
+	import Header from '../components/ui/Header.vue';
+	import Footer from '../components/ui/Footer.vue';
+	const loadingState = useLoading();
+
 	onMounted(()=> {
 		document.onreadystatechange = () => {
 			if(document.readyState == "complete") {
-				isLoaded.value = true;
+				loadingState.setIsLoading(true);
 			}
 		}
 	});
 </script>
 <template>
-	<div class="loading" v-if="!isLoaded"><img class="rotate" src="/favicon.png" alt="logo"></div>
+	<Header title="Leeman Tech Blog"/>
+	<div class="loading" v-if="!loadingState.isLoading"><img class="rotate" src="/favicon.png" alt="logo"></div>
 	<section class="wrapper container" v-else>
 		<div class="homeHero">
 			<div class="gradient">
@@ -37,6 +42,7 @@
 			</div>
 		</main>
 	</section>
+	<Footer/>
 </template>
 <style scoped>
 	.homeHero {

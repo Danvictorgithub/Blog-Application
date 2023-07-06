@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@esbuild/linux-x64": "^0.18.11",
+    "axios": "^1.4.0",
     "pinia": "^2.1.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
