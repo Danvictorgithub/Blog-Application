@@ -38,7 +38,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: calc(100svh-100px);
+        height: calc(100svh - 100px);
         padding: 0 24px;
     }
     .login-form {
@@ -48,7 +48,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        padding-top: 50px;
+        padding-top: 25px;
     }
     .form-group{
         display: flex;
@@ -58,7 +58,7 @@
         /* max-width: 400px; */
         /* flex: 1 1 0; */
         width: 100%;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
     .form-group input {
         font-size:1.5rem;
@@ -74,18 +74,20 @@
         border: 4px solid var(--main-color);
     }
     .logo {
-        height: 200px;
-        width: 200px;
+        height: 100px;
+        width: 100px;
     }
     .form-title-main {
-        font-size: 3rem;
+        font-size: 2.2rem;
+        word-spacing: -2px;
+        line-height: normal;
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 12px;
     }
     .form-title {
         font-size: 2rem;
         font-weight: 600;
-        margin-bottom: 35px;
+        margin-bottom: 12px;
     }
     .submitBtn {
         font-size: 2rem;
@@ -98,7 +100,7 @@
         max-width: 500px;
         width: 100%;
         margin-top: 24px;
-        margin-bottom: 24px;
+        /* margin-bottom: 24px; */
     }
     .submitBtn:hover {
         background-color: #90ee90;

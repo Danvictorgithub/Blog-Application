@@ -11,7 +11,9 @@
 <template>
 	<header>
 		<h1><RouterLink to="/"><img class="icon" src="/favicon.png">{{title || "Blog Application"}}</RouterLink></h1>
-		<button v-if="!hide" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer"><img class="drawerIcon" src="./icons/nav-drawer-icon.png" alt="Button"></button>
+		<button v-if="!hide" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer">
+			<span class="material-symbols-outlined menuDrawer">menu</span>
+		</button>
 		<ul v-if="!hide" :class="{on:menuToggle}" class="authButtons">
 			<RouterLink to="login">Login</RouterLink>
 			<RouterLink to="signup">Signup</RouterLink>
@@ -42,7 +44,8 @@
 		letter-spacing:2px;
 		text-transform:uppercase;
 		text-decoration: none;
-		color:var(--matte-black)
+		color:var(--matte-black);
+		line-height:25px;
 	}
 	header ul {
 		display:flex;
