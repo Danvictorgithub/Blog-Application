@@ -1,8 +1,8 @@
 <script setup>
   import {RouterView} from 'vue-router';
-  import {ref} from 'vue';
-  import Header from "./components/Header.vue";
-  import Footer from "./components/Footer.vue";
+  import { useAuthenticationStore } from './data/state';
+  import Header from "./components/ui/Header.vue";
+  import Footer from "./components/ui/Footer.vue";
 </script>
 <template>
   <Header title="Leeman Tech Blog"/>
