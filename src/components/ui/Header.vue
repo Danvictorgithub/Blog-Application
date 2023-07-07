@@ -1,11 +1,13 @@
 <script setup>
 	import {ref} from 'vue';
 	import { RouterLink } from 'vue-router';
+	import { useAuthenticationStore } from '../../data/state';
 	const drawerIcon = '../icons/nav-drawer-icon.png';
 	const props = defineProps({
 		title:String,
 		hide:{type:Boolean,default:false},
-	})
+	});
+	const AuthStore = useAuthenticationStore();
 	const menuToggle = ref('false');
 </script>
 <template>
@@ -15,8 +17,16 @@
 			<span class="material-symbols-outlined menuDrawer">menu</span>
 		</button>
 		<ul v-if="!hide" :class="{on:menuToggle}" class="authButtons">
-			<RouterLink to="login">Login</RouterLink>
-			<RouterLink to="signup">Signup</RouterLink>
+			<RouterLink to="/login">Login</RouterLink>
+			<RouterLink to="/signup">Signup</RouterLink>
+		</ul>
+		<button v-if="AuthStore.isLoggedIn" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer">
+			<span class="material-symbols-outlined menuDrawer">menu</span>
+		</button>
+		<ul v-if="AuthStore.isLoggedIn" :class="{on:menuToggle}" class="authButtons">
+			<p>{{ AuthStore.username }}</p>
+			<RouterLink to="/createpost">Create Post</RouterLink>
+			<RouterLink to="/signup">Manage Post</RouterLink>
 		</ul>
 	</header>
 </template>
@@ -53,14 +63,15 @@
 		gap:48px;
 		list-style:none;
 		padding: 0;
-
+		justify-content: center;
+		align-items: center;
 		transition-property: display;
 		transition-duration: 0.5s;
 		transition-timing-function: ease-out;
 		transition-delay: 0.25s;
 	}
-	header ul a{
-		width:100%;
+	header ul > *{
+		/* width:100%; */
 		text-decoration:none;
 		color:var(--matte-black);
 		font-size: 1.5rem;

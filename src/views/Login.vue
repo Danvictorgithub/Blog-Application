@@ -24,6 +24,7 @@
         .then((res) => {
             localStorage.setItem('token', `Bearer ${res.data.token}`);
             AuthStore.setIsLoggedIn(true);
+            AuthStore.setUsername(res.data.user.username);
             err.value = "";
             router.push("/");
         })

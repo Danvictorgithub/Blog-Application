@@ -1,9 +1,10 @@
-import {createRouter,createWebHistory} from 'vue-router';
+import {createRouter,createWebHistory, createWebHashHistory} from 'vue-router';
 import HomeView from '../views/Home.vue';
 import Blogpost from '../views/Blogpost.vue';
 import notFound from '../views/404.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
+import New from '../views/New.vue';
 const routes = [
 	{
 		path:'/',
@@ -26,13 +27,19 @@ const routes = [
 		component:Signup
 	},
 	{
+		path:'/createpost',
+		name:'createpost',
+		component:New
+	},
+	{
 		path:'/:pathMatch(.*)*',
 		name:'404',
 		component:notFound
 	},
 ];
 const router = createRouter({
-	history:createWebHistory(import.meta.env.BASE_URL), //jshint ignore:line
+	history:createWebHashHistory(import.meta.env.BASE_URL), //jshint ignore:line
+	mode:"hash",
 	routes,
 });
 

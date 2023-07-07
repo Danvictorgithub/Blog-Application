@@ -25,11 +25,15 @@ const useAuthenticationStore = defineStore(
     {
         state: () => (
             {
-                isLoggedIn:false
+                isLoggedIn:false,
+                username:""
             }),
         actions: {
             setIsLoggedIn (boolean) {
                 this.isLoggedIn = boolean;
+            },
+            setUsername (username) {
+                this.username = username;
             }
         }
     }

@@ -16,7 +16,7 @@
   API:
     Implement Authentication /
     Create Index /
-    Create Show
+    Create Show /
     Create New
     Create Create
     Create Edit
