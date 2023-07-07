@@ -1,2 +1,2 @@
 # Blog-Application
-Vue SPA for simple Blog Application
+Vue SPA ( +Pinia ) for simple Blog Application
