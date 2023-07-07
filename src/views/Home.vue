@@ -25,7 +25,6 @@
 			}
 		})
 	}
-	function Test() {Posts.data.push(1); console.log(Posts.data)}
 	console.log(Posts.data)
 	fetchPosts();
 	// onMounted(()=> {
@@ -49,6 +48,7 @@
 						Blog Post
 					</h2>
 					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro.</p>
+
 					<button class="readBlogPost">Read Blog</button>
 				</article>
 			</section>
@@ -64,7 +64,9 @@
 						{{ (Posts.data.length != 0) ? Posts.data[0].title : "Blog Post" }}
 					</h2>
 					<p>{{ (Posts.data.length != 0) ? Posts.data[0].content : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro." }}</p>
-					<button class="readBlogPost" @click="">Read Blog</button>
+					<div v-if="Posts.data[0] != undefined">
+						<RouterLink :to=/post/+Posts.data[0]._id><button  class="readBlogPost" @click="">Read Blog</button></RouterLink>
+					</div>
 				</article>
 			</section>
 			</div>

@@ -14,8 +14,8 @@
     Create Like Form
     Create Comment Form
   API:
-    Implement Authentication
-    Create Index
+    Implement Authentication /
+    Create Index /
     Create Show
     Create New
     Create Create

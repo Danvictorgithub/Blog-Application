@@ -1,42 +1,57 @@
 <script setup>
 	import Header from '../components/ui/Header.vue';
 	import Footer from '../components/ui/Footer.vue';
+	import { useRoute,useRouter } from 'vue-router';
+	import { onBeforeMount, onMounted, reactive ,ref, watch} from 'vue';
+	import axios from 'axios';
+	import { useAPI } from '../data/state';
+	import uniqid from 'uniqid';
+	const APIStore = useAPI();
+	const route = useRoute();
+	const router = useRouter();
+	const postId = route.params.id
+	const Post = ref();
+	onBeforeMount( watch(() => route.params.id, async (id) => {
+		Post.value = await getPost(id);
+		console.log(Post.value.comments);
+	},{ immediate: true }));
+	async function getPost(id) {
+		const response = await axios.get(`${APIStore.API}posts/${id}`)
+			.then(response => response.data.post)
+			.catch(error => {
+				if (error.response) {
+					router.push("/");
+				}
+			});
+		return response;
+	}
 </script>
 <template>
 	<Header title="Leeman's Tech Blog"/>
-	<section class="wrapper-blog container">
+	<section v-if="Post" class="wrapper-blog container">
 		<div class="blogMetaData">
-			<h2 class="blogAuthor">By: Some User</h2>
-			<h3 class="blogDate">November 4, 2002</h3>
+			<h2 class="blogAuthor">By: {{ Post.author.username }}</h2>
+			<!-- <h3 class="blogDate">November 4, 2002</h3> -->
 		</div>
 		<div class=blogHero>
-			<h1 class="blogTitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </h1>
-			<img class="blogPostImg" src="../assets/blogPostImage.jpg">
+			<h1 class="blogTitle">{{Post.title}}</h1>
+			<img class="blogPostImg" :src="Post.headlineImage">
 		</div>
-		<div class="blogContent">
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Est unde molestiae vitae odio tempora eos sapiente accusantium omnis, doloremque, ut similique obcaecati maxime odit neque consequatur provident nemo aliquam. Impedit!
-			</p>
+		<div v-html="Post.content" class="blogContent">
 		</div>
 		<hr/>
 		<section class="blogSection">
-			<p class="likes">25 likes</p>
-			<p class="numComments">2 Comments</p>
+			<p class="likes">{{ (Post.likes > 1) ? `${Post.likesCount} likes` :`${Post.likesCount} like`}}</p>
+			<p class="numComments">{{ (Post.comments.length) > 1 ? `${Post.comments.length} comments`: `${Post.comments.length} comment`  }} </p>
 			<article class="commentSection">
-				<div class="comment">
-					<p class="commentAuthor">Chris Thompson</p>
-					<p>This was a terrific read. I applaud your realness and vulnerability! We need more stories like this because you never know who you're inspiring and who will come behind you. Kudos to you and all that you've accomplished and WILL accomplish in the future! The lessons learned are an investment!</p>
-				</div>
-				<div class="comment">
-					<p class="commentAuthor">Sybil Mulokwa</p>
-					<p>Thanks for sharing your journey Anonymous! Can’t wait to see what you build in the next 10 years! Also, I’m a fellow entrepreneur building an edtech startup called Sparketh. Would love to chat if you’re available.</p>
+				<div v-for="comment in Post.comments" :key="uniqid()" class="comment">
+					<p class="commentAuthor">{{ comment.user.username }}</p>
+					<p>{{ comment.comment }}</p>
 				</div>
 			</article>
 		</section>
 	</section>
+	<section v-else class="wrapper blog"></section>
 	<Footer/>
 </template>
 <style scoped>
@@ -48,7 +63,7 @@
 }
 .blogPostImg {
 	width:100%;
-	height: 425px;
+	height: 500px;
 	object-fit:cover;
 }
 .blogTitle {
@@ -74,6 +89,10 @@
 .blogContent {
 	padding: 30px 10vw;
 	font-size:1.5rem;
+	overflow:hidden;
+}
+.blogContent img {
+	width: 100%
 }
 .blogContent::first-letter {
 	font-size:3rem;
