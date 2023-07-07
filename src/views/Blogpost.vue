@@ -3,7 +3,7 @@
 	import Footer from '../components/ui/Footer.vue';
 </script>
 <template>
-	<Header title="Leeman Tech Blog"/>
+	<Header title="Leeman's Tech Blog"/>
 	<section class="wrapper-blog container">
 		<div class="blogMetaData">
 			<h2 class="blogAuthor">By: Some User</h2>

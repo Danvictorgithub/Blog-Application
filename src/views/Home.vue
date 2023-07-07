@@ -1,10 +1,10 @@
 <script setup>
 	import {ref, onMounted} from 'vue';
-	import {useLoading} from "../data/state";
+	import {useLoading, useAuthenticationStore} from "../data/state";
 	import Header from '../components/ui/Header.vue';
 	import Footer from '../components/ui/Footer.vue';
 	const loadingState = useLoading();
-
+	const AuthStore = useAuthenticationStore();
 	onMounted(()=> {
 		document.onreadystatechange = () => {
 			if(document.readyState == "complete") {
@@ -14,9 +14,10 @@
 	});
 </script>
 <template>
-	<Header title="Leeman Tech Blog"/>
-	<div class="loading" v-if="!loadingState.isLoading"><img class="rotate" src="/favicon.png" alt="logo"></div>
-	<section class="wrapper container" v-else>
+	<Header title="Leeman's Tech Blog" hide="true" v-if="AuthStore.isLoggedIn"/>
+	<Header title="Leeman's Tech Blog" v-else/>
+	<!-- <div class="loading" v-if="!loadingState.isLoading"><img class="rotate" src="/favicon.png" alt="logo"></div> -->
+	<section class="wrapper container">
 		<div class="homeHero">
 			<div class="gradient">
 				<section class="blogHeroInfo">

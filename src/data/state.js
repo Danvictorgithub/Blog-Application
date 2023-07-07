@@ -16,7 +16,7 @@ const useAPI = defineStore(
     "API",
     {
         state: () => ({
-            API: "https://localhost:5454/api/"
+            API: "http://localhost:5454/api/"
         })
     }
 );
@@ -25,11 +25,11 @@ const useAuthenticationStore = defineStore(
     {
         state: () => (
             {
-                isLoggedIn:true
+                isLoggedIn:false
             }),
         actions: {
-            setIsLoggedIn: (boolean) => {
-                state.isLoggedIn = boolean;
+            setIsLoggedIn (boolean) {
+                this.isLoggedIn = boolean;
             }
         }
     }

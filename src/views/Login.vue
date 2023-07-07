@@ -1,20 +1,48 @@
 <script setup>
-    import { ref } from 'vue';
+    import { ref, watch } from 'vue';
+    import { useRoute, useRouter } from 'vue-router';
     import axios from 'axios';
     import Header from '../components/ui/Header.vue';
     import * as states from "../data/state";
     const usernameInput = ref("");
     const passwordInput = ref("");
+    const err = ref("");
     const APIStore = states.useAPI();
+    const AuthStore = states.useAuthenticationStore();
+    const router = useRouter();
+    function getData() {
+    // Stores FormData
+        let form = {}
+        form["username"] = usernameInput.value;
+        form["password"] = passwordInput.value;
+        return form;
+    }
     function onSubmit() {
-        axios.get("");
+    // Post Login Helper Function
+        const form = getData();
+        axios.post(`${APIStore.API}login`, form)
+        .then((res) => {
+            localStorage.setItem('token', `Bearer ${res.data.token}`);
+            AuthStore.setIsLoggedIn(true);
+            err.value = "";
+            router.push("/");
+        })
+        .catch( (error) => {
+            if (error.response) {
+                err.value = error.response.data.message;
+            } else if (error.request) {
+                err.value = "Unable to Connect to the server";
+            }
+        });
+    }
+    if (AuthStore.isLoggedIn) {
+        router.push("/");
     }
 </script>
 <template>
-    <Header name="Leeman's Tech Blog" :hide="true"></Header>
+    <Header title="Leeman's Tech Blog" :hide="true"></Header>
     <section class="wrapper container">
         <div class="login-container">
-
             <form @submit.prevent="onSubmit" class="login-form">
                 <img class="logo" src="/favicon.png">
                 <h1 class="form-title-main" >Leeman's Tech Blog</h1>
@@ -28,6 +56,7 @@
                     <input v-model="passwordInput" type="password" class="form-control" id="password" placeholder="Password">
                 </div>
                 <button type="submit" class="submitBtn">Login</button>
+                <p class="errors">{{ err }}</p>
             </form>
         </div>
     </section>
@@ -100,7 +129,7 @@
         max-width: 500px;
         width: 100%;
         margin-top: 24px;
-        /* margin-bottom: 24px; */
+        margin-bottom: 24px;
     }
     .submitBtn:hover {
         background-color: #90ee90;
@@ -109,5 +138,9 @@
         border:2px solid var(--main-color);
         background-color: white;
         color:var(--matte-black);
+    }
+    .errors {
+        font-size: 1.2rem;
+        font-weight: 600;
     }
 </style>
