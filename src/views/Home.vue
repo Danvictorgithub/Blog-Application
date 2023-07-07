@@ -1,29 +1,52 @@
 <script setup>
-	import {ref, onMounted} from 'vue';
-	import {useLoading, useAuthenticationStore} from "../data/state";
+	import {ref,reactive, onMounted,computed} from 'vue';
+	import { useRouter } from 'vue-router';
+	import uniqid from "uniqid";
+	import axios from "axios";
+	import {useAPI,useLoading, useAuthenticationStore} from "../data/state";
 	import Header from '../components/ui/Header.vue';
 	import Footer from '../components/ui/Footer.vue';
-	const loadingState = useLoading();
+	// const loadingState = useLoading();
+	const router = useRouter();
+	const APIStore = useAPI();
 	const AuthStore = useAuthenticationStore();
-	onMounted(()=> {
-		document.onreadystatechange = () => {
-			if(document.readyState == "complete") {
-				loadingState.setIsLoading(true);
+	const Posts = reactive({data:[]});
+	const PostList = computed(() => {
+		return Posts.data.filter((post) => !(post == Posts.data[0]));
+	})
+	async function fetchPosts() {
+		axios.get(`${APIStore.API}posts`)
+		.then((response) => {
+			Posts.data = response.data.posts;
+			console.log(PostList);
+		}).catch (err => {
+			if (err.request) {
+				console.log(err);
 			}
-		}
-	});
+		})
+	}
+	function Test() {Posts.data.push(1); console.log(Posts.data)}
+	console.log(Posts.data)
+	fetchPosts();
+	// onMounted(()=> {
+	// 	document.onreadystatechange = () => {
+	// 		if(document.readyState == "complete") {
+	// 			loadingState.setIsLoading(true);
+	// 		}
+	// 	}
+	// });
 </script>
 <template>
 	<Header title="Leeman's Tech Blog" hide="true" v-if="AuthStore.isLoggedIn"/>
 	<Header title="Leeman's Tech Blog" v-else/>
-	<!-- <div class="loading" v-if="!loadingState.isLoading"><img class="rotate" src="/favicon.png" alt="logo"></div> -->
+	<div class="loading" v-if="Posts.data.length == 0"><img class="rotate" src="/favicon.png" alt="logo"></div>
 	<section class="wrapper container">
-		<div class="homeHero">
+		<div v-if="Posts.data[0] == undefined" class="homeHero">
 			<div class="gradient">
 				<section class="blogHeroInfo">
 				<article>
 					<h2>
-						Blog Title
+						Blog Post
 					</h2>
 					<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro.</p>
 					<button class="readBlogPost">Read Blog</button>
@@ -32,14 +55,31 @@
 			</div>
 			<img class="heroImg" src="../assets/steve.jpg">
 		</div>
+		<div v-else class="homeHero">
+			<div class="gradient">
+				<section class="blogHeroInfo">
+				<article>
+					<h2>
+						<!-- Blog Title -->
+						{{ (Posts.data.length != 0) ? Posts.data[0].title : "Blog Post" }}
+					</h2>
+					<p>{{ (Posts.data.length != 0) ? Posts.data[0].content : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro." }}</p>
+					<button class="readBlogPost" @click="">Read Blog</button>
+				</article>
+			</section>
+			</div>
+			<img class="heroImg" :src=Posts.data[0].headlineImage>
+		</div>
 		<main>
 			<h2>Recently Uploaded Blogs:</h2>
 			<div class="recentBlog">
-				<div v-for="i in [5,4,3,2,1]" v-bind:key={i} class="blogCard">
-					<img src="../assets/sampleBlogImage.png">
-					<h1>Lorem Ipsum dolor sit amet consectetur</h1>
-					<p>Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro.</p>
+				<RouterLink :to=/post/+post._id v-for="post in PostList" :key="uniqid()">
+				<div class="blogCard">
+					<img :src=post.headlineImage>
+					<h1>{{ post.title }}</h1>
+					<p>{{ post.content }}</p>
 				</div>
+				</RouterLink>
 			</div>
 		</main>
 	</section>
@@ -118,8 +158,12 @@
 	}
 	.recentBlog {
 		display:grid;
-		grid-template-columns: repeat(auto-fit,minmax(350px,1fr));
+		grid-template-columns: repeat(auto-fill,minmax(350px,1fr));
 		gap:24px;
+	}
+	a {
+		text-decoration: none;
+		color: var(--matte-black);
 	}
 	.blogCard img {
 		width:100%;
