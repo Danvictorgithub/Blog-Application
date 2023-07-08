@@ -33,7 +33,7 @@
 		<ul v-if="AuthStore.isLoggedIn" :class="{on:menuToggle}" class="authButtons">
 			<p>{{ AuthStore.username }}</p>
 			<RouterLink to="/createpost">Create Post</RouterLink>
-			<RouterLink to="/signup">Manage Post</RouterLink>
+			<RouterLink to="/managepost">Manage Post</RouterLink>
 			<button @click="logout">Log Out</button>
 		</ul>
 	</header>

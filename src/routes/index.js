@@ -5,6 +5,7 @@ import notFound from '../views/404.vue';
 import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import New from '../views/New.vue';
+import ManagePost from '../views/ManagePost.vue';
 const routes = [
 	{
 		path:'/',
@@ -33,6 +34,11 @@ const routes = [
 
 		// }
 		component:New
+	},
+	{
+		path:'/managepost',
+		name:'managePost',
+		component:ManagePost
 	},
 	{
 		path:'/:pathMatch(.*)*',
