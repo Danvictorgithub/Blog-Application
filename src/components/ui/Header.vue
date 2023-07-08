@@ -2,6 +2,8 @@
 	import {ref} from 'vue';
 	import { RouterLink } from 'vue-router';
 	import { useAuthenticationStore } from '../../data/state';
+	import { useRouter } from 'vue-router';
+	const router = useRouter();
 	const drawerIcon = '../icons/nav-drawer-icon.png';
 	const props = defineProps({
 		title:String,
@@ -9,6 +11,11 @@
 	});
 	const AuthStore = useAuthenticationStore();
 	const menuToggle = ref('false');
+	function logout() {
+		localStorage.clear();
+		AuthStore.setIsLoggedIn(false);
+		router.push('/');
+	}
 </script>
 <template>
 	<header>
@@ -27,6 +34,7 @@
 			<p>{{ AuthStore.username }}</p>
 			<RouterLink to="/createpost">Create Post</RouterLink>
 			<RouterLink to="/signup">Manage Post</RouterLink>
+			<button @click="logout">Log Out</button>
 		</ul>
 	</header>
 </template>
@@ -78,6 +86,11 @@
 	}
 	.hideToggle {
 		display:none;
+	}
+	button {
+		background-color: white;
+		border:0;
+		font-weight: 375;
 	}
 	@media (max-width:600px) {
 		header {
