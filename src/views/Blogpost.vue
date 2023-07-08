@@ -97,7 +97,7 @@
 					<button v-if="AuthStore.isLoggedIn" @click="toggleLikeHandler" type="button"><span  class="material-symbols-outlined" :class="{liked:liked}">thumb_up</span></button>
 				</p>
 				<p class="numComments">{{ (Post.comments.length) > 1 ? `${Post.comments.length} comments`: `${Post.comments.length} comment`  }} </p>
-				<div class="commentForm">
+				<div v-if="AuthStore.isLoggedIn" class="commentForm">
 						<form @submit.prevent="addComment" class="commentForm">
 							<div>
 								<textarea type="text" @change="(e)=>comment=e.target.value" class="commentInput" :value="comment" placeholder="Write a comment..."></textarea>
