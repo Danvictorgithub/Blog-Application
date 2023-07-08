@@ -6,6 +6,7 @@
 	import axios from 'axios';
 	import { useAPI } from '../data/state';
 	import uniqid from 'uniqid';
+	import {DateTime} from "luxon";
 	const APIStore = useAPI();
 	const route = useRoute();
 	const router = useRouter();
@@ -27,11 +28,11 @@
 	}
 </script>
 <template>
-	<Header title="Leeman's Tech Blog"/>
+	<Header title="Leeman's Tech Blog" hide=true />
 	<section v-if="Post" class="wrapper-blog container">
 		<div class="blogMetaData">
 			<h2 class="blogAuthor">By: {{ Post.author.username }}</h2>
-			<!-- <h3 class="blogDate">November 4, 2002</h3> -->
+			<h3 class="blogDate">{{ DateTime.fromISO(Post.date).toLocaleString(DateTime.DATETIME_MED) }}</h3>
 		</div>
 		<div class=blogHero>
 			<h1 class="blogTitle">{{Post.title}}</h1>
@@ -80,6 +81,7 @@
 	justify-content:flex-start;
 	align-items:center;
 	gap:12px;
+	padding: 0 24px;
 }
 .blogAuthor {
 	padding: 10px 0;

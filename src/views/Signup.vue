@@ -30,6 +30,7 @@
         .catch( (error) => {
             if (error.response) {
                 err.value = error.response.data.message;
+                success.value = "";
             } else if (error.request) {
                 err.value = "Unable to Connect to the server";
             }

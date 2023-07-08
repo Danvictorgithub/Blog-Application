@@ -4,6 +4,7 @@
 	import uniqid from "uniqid";
 	import axios from "axios";
 	import {useAPI,useLoading, useAuthenticationStore} from "../data/state";
+	import {DateTime} from "luxon";
 	import Header from '../components/ui/Header.vue';
 	import Footer from '../components/ui/Footer.vue';
 	// const loadingState = useLoading();
@@ -79,6 +80,7 @@
 				<div class="blogCard">
 					<img :src=post.headlineImage>
 					<h1>{{ post.title }}</h1>
+					<p>{{ DateTime.fromISO(post.date).toLocaleString(DateTime.DATETIME_MED) }}</p>
 					<p>{{ post.content }}</p>
 				</div>
 				</RouterLink>
@@ -172,7 +174,15 @@
 		height:250px;
 		object-fit:cover;
 	}
-
+	.blogCard h1 {
+		font-size:1.2rem;
+        font-weight:bold;
+        color: var(--matte-black);
+	}
+	.blogCard p, .blogCard h1 {
+		width:100%;
+		overflow-wrap: break-word;
+	}
 	@media (max-width:768px) {
 		.blogHeroInfo {
 			grid-template-columns: 1fr;

@@ -10,15 +10,15 @@
   UI:
     Create Login Form /
     Create SignUp Form /
-    Create WYSIWYG
+    Create WYSIWYG /
     Create Like Form
     Create Comment Form
   API:
     Implement Authentication /
     Create Index /
     Create Show /
-    Create New
-    Create Create
+    Create New /
+    Create Create /
     Create Edit
     Create Update
     Create Delete

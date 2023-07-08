@@ -29,6 +29,9 @@ const routes = [
 	{
 		path:'/createpost',
 		name:'createpost',
+		// beforeEnter: (to,from) => {
+
+		// }
 		component:New
 	},
 	{
