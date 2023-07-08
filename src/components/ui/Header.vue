@@ -5,7 +5,7 @@
 	const drawerIcon = '../icons/nav-drawer-icon.png';
 	const props = defineProps({
 		title:String,
-		hide:{type:Boolean,default:false},
+		// hide:{type:Boolean,default:false},
 	});
 	const AuthStore = useAuthenticationStore();
 	const menuToggle = ref('false');
@@ -13,10 +13,10 @@
 <template>
 	<header>
 		<h1><RouterLink to="/"><img class="icon" src="/favicon.png">{{title || "Blog Application"}}</RouterLink></h1>
-		<button v-if="!hide" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer">
+		<button v-if="!(AuthStore.isLoggedIn)" @click="menuToggle = !menuToggle" class="hideToggle menuDrawer">
 			<span class="material-symbols-outlined menuDrawer">menu</span>
 		</button>
-		<ul v-if="!hide" :class="{on:menuToggle}" class="authButtons">
+		<ul v-if="!(AuthStore.isLoggedIn)" :class="{on:menuToggle}" class="authButtons">
 			<RouterLink to="/login">Login</RouterLink>
 			<RouterLink to="/signup">Signup</RouterLink>
 		</ul>

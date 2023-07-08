@@ -37,8 +37,7 @@
 	// });
 </script>
 <template>
-	<Header title="Leeman's Tech Blog" hide="true" v-if="AuthStore.isLoggedIn"/>
-	<Header title="Leeman's Tech Blog" v-else/>
+	<Header title="Leeman's Tech Blog"/>
 	<div class="loading" v-if="Posts.data.length == 0"><img class="rotate" src="/favicon.png" alt="logo"></div>
 	<section class="wrapper container">
 		<div v-if="Posts.data[0] == undefined" class="homeHero">

@@ -57,7 +57,7 @@
     // }
 </script>
 <template>
-    <Header hide=true />
+    <Header/>
     <section class="wrapper container createPost">
         <h1>Create Post</h1>
         <form @submit.prevent="uploadPost">

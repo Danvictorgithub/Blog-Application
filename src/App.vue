@@ -11,7 +11,7 @@
     Create Login Form /
     Create SignUp Form /
     Create WYSIWYG /
-    Create Like Form
+    Create Like Form /
     Create Comment Form
   API:
     Implement Authentication /
