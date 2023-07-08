@@ -12,7 +12,7 @@
     Create SignUp Form /
     Create WYSIWYG /
     Create Like Form /
-    Create Comment Form
+    Create Comment Form /
   API:
     Implement Authentication /
     Create Index /
