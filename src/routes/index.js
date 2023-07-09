@@ -6,6 +6,7 @@ import Login from '../views/Login.vue';
 import Signup from '../views/Signup.vue';
 import New from '../views/New.vue';
 import ManagePost from '../views/ManagePost.vue';
+import EditPost from '../views/Edit.vue';
 const routes = [
 	{
 		path:'/',
@@ -16,6 +17,11 @@ const routes = [
 		path:'/post/:id',
 		name:'blogPost',
 		component:Blogpost
+	},
+	{
+		path:'/post/:id/edit',
+		name:'editPost',
+		component:EditPost
 	},
 	{
 		path:'/login',
