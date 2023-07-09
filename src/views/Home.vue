@@ -3,26 +3,32 @@
 	import { useRouter } from 'vue-router';
 	import uniqid from "uniqid";
 	import axios from "axios";
-	import {useAPI,useLoading, useAuthenticationStore} from "../data/state";
+	import {useAPI, useAuthenticationStore} from "../data/state";
 	import {DateTime} from "luxon";
 	import Header from '../components/ui/Header.vue';
 	import Footer from '../components/ui/Footer.vue';
 	// const loadingState = useLoading();
+	const loading = ref(true);
 	const router = useRouter();
 	const APIStore = useAPI();
 	const AuthStore = useAuthenticationStore();
 	const Posts = reactive({data:[]});
-	const PostList = computed(() => {
-		return Posts.data.filter((post) => !(post == Posts.data[0]));
-	})
+	const randomPost = ref();
 	async function fetchPosts() {
-		axios.get(`${APIStore.API}posts`)
+		await axios.get(`${APIStore.API}posts`)
 		.then((response) => {
 			Posts.data = response.data.posts;
 		}).catch (err => {
 			if (err.request) {
 			}
 		})
+		await axios.get(`${APIStore.API}posts/random`)
+		.then((response) => {
+			randomPost.value = response.data.post;
+			loading.value = false;
+			console.log(response.data.post);
+		})
+
 	}
 	fetchPosts();
 	// onMounted(()=> {
@@ -35,9 +41,9 @@
 </script>
 <template>
 	<Header title="Leeman's Tech Blog"/>
-	<div class="loading" v-if="Posts.data.length == 0"><img class="rotate" src="/favicon.png" alt="logo"></div>
+	<div class="loading" v-if="loading"><img class="rotate" src="/favicon.png" alt="logo"></div>
 	<section class="wrapper container">
-		<div v-if="Posts.data[0] == undefined" class="homeHero">
+		<div v-if="!randomPost" class="homeHero">
 			<div class="gradient">
 				<section class="blogHeroInfo">
 				<article>
@@ -58,21 +64,21 @@
 				<article>
 					<h2>
 						<!-- Blog Title -->
-						{{ (Posts.data.length != 0) ? Posts.data[0].title : "Blog Post" }}
+						{{ (randomPost[0].title) }}
 					</h2>
-					<p>{{ (Posts.data.length != 0) ? Posts.data[0].content : "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse ipsam velit nihil eos nam, odio harum, quae quidem amet sunt facere vel non eligendi minima laborum assumenda soluta hic porro." }}</p>
-					<div v-if="Posts.data[0] != undefined">
-						<RouterLink :to=/post/+Posts.data[0]._id><button  class="readBlogPost" @click="">Read Blog</button></RouterLink>
+					<p>{{ randomPost[0].content }}</p>
+					<div>
+						<RouterLink :to=/post/+randomPost[0]._id><button  class="readBlogPost" @click="">Read Blog</button></RouterLink>
 					</div>
 				</article>
 			</section>
 			</div>
-			<img class="heroImg" :src=Posts.data[0].headlineImage>
+			<img class="heroImg" :src=randomPost[0].headlineImage>
 		</div>
 		<main>
 			<h2>Recently Uploaded Blogs:</h2>
 			<div class="recentBlog">
-				<RouterLink :to=/post/+post._id v-for="post in PostList" :key="uniqid()">
+				<RouterLink :to=/post/+post._id v-for="post in Posts.data" :key="uniqid()">
 				<div class="blogCard">
 					<img :src=post.headlineImage>
 					<h1>{{ post.title }}</h1>
@@ -112,18 +118,22 @@
 		grid-template-columns: 1fr 1fr;
 	}
 	.blogHeroInfo article {
+		min-width: 0;
 		padding:24px;
 		color:white;
 		grid-column: 2 / 3;
+		/* overflow-wrap: break-word; */
 	}
 	.blogHeroInfo article h2{
 		font-size:2rem;
 		font-weight:bold;
 		color: var(--main-color);
+		overflow-wrap: break-word;
 	}
 	.blogHeroInfo article p {
 		font-size:1.25rem;
 		margin-bottom:12px;
+		overflow-wrap: break-word;
 	}
 	.blogHeroInfo article button {
 /*		background-color:white;*/
