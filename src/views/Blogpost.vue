@@ -83,6 +83,7 @@
 			<div class="blogMetaData">
 				<h2 class="blogAuthor">By: {{ Post.author.username }}</h2>
 				<h3 class="blogDate">{{ DateTime.fromISO(Post.date).toLocaleString(DateTime.DATETIME_MED) }}</h3>
+				<h4 v-if="Post.isEdited">[Edited]</h4>
 			</div>
 			<div class=blogHero>
 				<h1 class="blogTitle">{{Post.title}}</h1>
@@ -114,7 +115,9 @@
 				</article>
 			</section>
 		</section>
-		<section v-else class="wrapper blog"></section>
+		<section v-else class="wrapper-blog container">
+			Loading...
+		</section>
 		<Footer/>
 	</template>
 	<style scoped>
@@ -138,15 +141,17 @@
 		line-height: 2ch;
 	}
 	.blogMetaData {
+		width:100%;
 		margin-top:36px;
 		display:flex;
+		flex-direction: column;
 		justify-content:flex-start;
-		align-items:center;
-		gap:12px;
+		align-items:flex-start;
+		/* gap:12px; */
 		padding: 0 24px;
 	}
 	.blogAuthor {
-		padding: 10px 0;
+		/* padding: 10px 0; */
 		font-size:1.5rem;
 		font-style:italic;
 	}

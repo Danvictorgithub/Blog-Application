@@ -19,14 +19,11 @@
 		axios.get(`${APIStore.API}posts`)
 		.then((response) => {
 			Posts.data = response.data.posts;
-			console.log(PostList);
 		}).catch (err => {
 			if (err.request) {
-				console.log(err);
 			}
 		})
 	}
-	console.log(Posts.data)
 	fetchPosts();
 	// onMounted(()=> {
 	// 	document.onreadystatechange = () => {

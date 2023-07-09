@@ -11,8 +11,10 @@
     const AuthStore = useAuthenticationStore();
     const Posts = ref([]);
 
+    const loading = ref(true);
+
     async function updateManagePost() {
-        axios
+        await axios
             .get(`${APIStore.API}posts/getUserPost`, {
                 headers: { Authorization: localStorage.getItem("token") },
             })
@@ -28,6 +30,7 @@
                     }
                 }
             });
+        loading.value = false;
     }
     async function deleteHandler(id) {
         axios.delete(`${APIStore.API}posts/${id}`, {
@@ -46,6 +49,7 @@
     <section class="wrapper container managePost">
         <h2>Your Posts</h2>
         <div class="postList">
+            <h2 v-if="loading">Loading...</h2>
             <div v-for="post in Posts" class="post">
                     <RouterLink :to=/post/+post._id class="postGroup">
                         <div class="imageContainer">

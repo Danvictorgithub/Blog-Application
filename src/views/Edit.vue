@@ -20,6 +20,8 @@
     const content = ref("");
     const blogImagePrev = ref("");
 
+    const loading = ref(false);
+
     function blogImageHandler(e) {
         //updates Blog Image Preview
         //saves Ref to blogImage for Upload
@@ -32,6 +34,10 @@
         }
     }
     function editPost() {
+        if (loading.value) {
+            return;
+        }
+        loading.value = true;
         const formData = new FormData();
         formData.append("title", blogTitle.value);
         formData.append("content", content.value);
@@ -47,8 +53,10 @@
                     router.push(`/`);
                 }
                 error.value = err.response.data;
+                loading.value = false;
             } else if (err.request) {
                 error.value = [{msg:"Unable to upload post to server. Please try later."}];
+                loading.value = false;
             }
         });
     }
@@ -64,9 +72,9 @@
                     }
                 })
 		},{ immediate: true }));
-    // if (!AuthStore.isLoggedIn) {
-    //     router.push("/");
-    // }
+    if (!AuthStore.isLoggedIn) {
+        router.push("/");
+    }
 </script>
 <template>
     <Header/>
@@ -86,6 +94,7 @@
             </div>
             <TinyMCE v-if="content"  :initContent="content" @tinymcecontent="(childContent) => content = childContent"/>
             <button type="submit">Submit</button>
+            <h2 v-if="loading">Editing...</h2>
             <ul>
                 <li v-if="error.message">{{ error.message}}</li>
                 <li v-for="err in error.errors" :key="uniqid()">
@@ -169,6 +178,14 @@
         font-weight: bold;
         border-radius: 12px;
         background-color: white;
+    }
+    button:hover {
+        background-color: var(--main-color);
+        color:white
+    }
+    button:active {
+        background-color: white;
+        color:var(--main-color);
     }
     .createPost h1 {
         font-weight: bolder;

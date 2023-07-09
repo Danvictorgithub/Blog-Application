@@ -1,26 +1,13 @@
 <script setup>
   import {RouterView} from 'vue-router';
+  import { useAuthenticationStore } from './data/state';
+  if (localStorage.getItem('token') && localStorage.getItem('username')) {
+    useAuthenticationStore().setUsername(localStorage.getItem('username'));
+    useAuthenticationStore().setIsLoggedIn(true);
+  }
 </script>
 <template>
   <RouterView/>
 </template>
 <style scoped>
 </style>
-<!-- Todo:
-  UI:
-    Create Login Form /
-    Create SignUp Form /
-    Create WYSIWYG /
-    Create Like Form /
-    Create Comment Form /
-    Create ManagePost /
-  API:
-    Implement Authentication /
-    Create Index /
-    Create Show /
-    Create New /
-    Create Create /
-    Create Edit /
-    Create Update /
-    Create Delete /
--->
