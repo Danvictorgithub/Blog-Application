@@ -9,7 +9,7 @@
     import uniqid from "uniqid";
     const router = useRouter();
     const route = useRoute();
-    const postID = route.params.postID;
+    const postID = route.params.id;
     const AuthStore = useAuthenticationStore();
     const APIStore = useAPI();
 
@@ -36,10 +36,8 @@
         formData.append("title", blogTitle.value);
         formData.append("content", content.value);
         formData.append("headlineImage", blogImage.value);
-        axios.post(APIStore.API+'posts/add',formData, { headers: {"Authorization": localStorage.getItem("token")}})
+        axios.put(APIStore.API+'posts/'+postID,formData, { headers: {"Authorization": localStorage.getItem("token")}})
         .then((response) => {
-            // console.log("Success");
-            // console.log(response.data);
             router.push(`/post/${response.data.postId}`);
         })
         .catch((err) => {
@@ -49,17 +47,23 @@
                     router.push(`/`);
                 }
                 error.value = err.response.data;
-                console.log(error.value);
-                console.log(err.response);
             } else if (err.request) {
                 error.value = [{msg:"Unable to upload post to server. Please try later."}];
             }
         });
     }
-    onBeforeMount(() => {
-        axios.get(APIStore.API+'posts/'+postID)
-            .then((response) => {Post.value = response.data.post});
-    },{immediate:true});
+    onBeforeMount( watch(() => postID, async (id) => {
+            axios.get(`${APIStore.API}posts/${id}`)
+                .then((response) => {
+                    Post.value = response.data.post;
+                    blogTitle.value = Post.value.title;
+                    blogImagePrev.value = Post.value.headlineImage;
+                    content.value = Post.value.content;
+                    if (Post.value.author.username !== AuthStore.username) {
+                        router.push("/");
+                    }
+                })
+		},{ immediate: true }));
     // if (!AuthStore.isLoggedIn) {
     //     router.push("/");
     // }
@@ -80,7 +84,7 @@
             </div>
             <img v-if="blogImagePrev" class="blogImagePreview" :src="blogImagePrev" alt="Blog Image Review">
             </div>
-            <TinyMCE @tinymcecontent="(childContent) => content = childContent"/>
+            <TinyMCE v-if="content"  :initContent="content" @tinymcecontent="(childContent) => content = childContent"/>
             <button type="submit">Submit</button>
             <ul>
                 <li v-if="error.message">{{ error.message}}</li>

@@ -47,7 +47,7 @@
         <h2>Your Posts</h2>
         <div class="postList">
             <div v-for="post in Posts" class="post">
-                    <RouterLink :to=/post/+post._id+/edit/ class="postGroup">
+                    <RouterLink :to=/post/+post._id class="postGroup">
                         <div class="imageContainer">
                             <img class="postImage" :src="post.headlineImage" />
                         </div>

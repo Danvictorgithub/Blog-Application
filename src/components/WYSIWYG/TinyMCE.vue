@@ -6,10 +6,9 @@
     import {ref , watch} from 'vue';
     const APIStore = useAPI();
     const props = defineProps({
-        initContent: {type:String,default:"Insert your content here"},
-        edit: {type:Boolean,default:false},
+        initContent: {type:String},
     });
-    const content = ref("");
+    const content = ref(props.initContent);
     const emit = defineEmits(['tinymcecontent']);
 
     watch(content, (newContent) => emit('tinymcecontent', newContent)); //Passes contentValue to parent
@@ -47,7 +46,6 @@
             reader.readAsArrayBuffer(file);
             reader.onload = async () => {
             const response = await uploadImage(file);
-            console.log(response);
             callback(response.img);
         }
         }
@@ -63,6 +61,7 @@
     image_list: [
         { title: 'Default Blog Image', value: DefaultBlogImage },
         ],
+    a11y_advanced_options: true,
     file_picker_callback:handleFilePicker
     }"
     :initialValue="initContent"

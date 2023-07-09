@@ -19,7 +19,6 @@
     function blogImageHandler(e) {
         //updates Blog Image Preview
         //saves Ref to blogImage for Upload
-
         blogImage.value = e.target.files[0];
         const fileReader = new FileReader()
         fileReader.readAsDataURL(e.target.files[0]);
@@ -34,8 +33,6 @@
         formData.append("headlineImage", blogImage.value);
         axios.post(APIStore.API+'posts/add',formData, { headers: {"Authorization": localStorage.getItem("token")}})
         .then((response) => {
-            // console.log("Success");
-            // console.log(response.data);
             router.push(`/post/${response.data.postId}`);
         })
         .catch((err) => {
@@ -45,16 +42,16 @@
                     router.push(`/`);
                 }
                 error.value = err.response.data;
-                console.log(error.value);
-                console.log(err.response);
+
             } else if (err.request) {
                 error.value = [{msg:"Unable to upload post to server. Please try later."}];
             }
         });
     }
-    // if (!AuthStore.isLoggedIn) {
-    //     router.push("/");
-    // }
+
+    if (!AuthStore.isLoggedIn) {
+        router.push("/");
+    }
 </script>
 <template>
     <Header/>
