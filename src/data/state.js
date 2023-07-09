@@ -16,7 +16,7 @@ const useAPI = defineStore(
     "API",
     {
         state: () => ({
-            API: "https://leemans-tech-blog-api.onrender.com/api"
+            API: "https://leemans-tech-blog-api.onrender.com/api/"
         })
     }
 );
