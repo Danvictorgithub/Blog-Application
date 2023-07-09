@@ -20,7 +20,7 @@
     Create Show /
     Create New /
     Create Create /
-    Create Edit
+    Create Edit /
     Create Update
-    Create Delete
+    Create Delete /
 -->

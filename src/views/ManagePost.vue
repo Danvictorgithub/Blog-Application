@@ -10,8 +10,8 @@
     const APIStore = useAPI();
     const AuthStore = useAuthenticationStore();
     const Posts = ref([]);
-    onBeforeMount(() => {
-        //loads users posts
+
+    async function updateManagePost() {
         axios
             .get(`${APIStore.API}posts/getUserPost`, {
                 headers: { Authorization: localStorage.getItem("token") },
@@ -28,6 +28,17 @@
                     }
                 }
             });
+    }
+    async function deleteHandler(id) {
+        axios.delete(`${APIStore.API}posts/${id}`, {
+            headers: {Authorization: localStorage.getItem("token")}})
+            .then(() => {
+                updateManagePost();
+            })
+    }
+    onBeforeMount(async () => {
+        //loads users posts
+        await updateManagePost();
     });
 </script>
 <template>
@@ -49,11 +60,13 @@
                         </div>
                     </RouterLink>
                     <div class="crudTools">
-                            <button>
-                                <span class="material-symbols-outlined">update</span>
-                                Update
-                            </button>
-                            <button>
+                            <RouterLink :to=/post/+post._id+/edit/>
+                                <button>
+                                    <span class="material-symbols-outlined">update</span>
+                                    Update
+                                </button>
+                            </RouterLink>
+                            <button @click="deleteHandler(post._id)">
                                 <span class="material-symbols-outlined">delete</span>
                                 Delete
                             </button>
@@ -64,6 +77,10 @@
     <Footer />
 </template>
 <style scoped>
+    a {
+        color: var(--matte-black);
+        text-decoration: none;
+    }
     .managePost {
         padding: 24px 12px;
     }
@@ -94,8 +111,6 @@
         flex: 1 1 0;
         min-width:0%;
         display:flex;
-        color: var(--matte-black);
-        text-decoration: none;
     }
     .postInfo {
         flex: 1 1 0;
