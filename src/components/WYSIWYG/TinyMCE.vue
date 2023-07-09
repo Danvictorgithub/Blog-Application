@@ -3,7 +3,7 @@
     import DefaultBlogImage from "../../assets/blogPostImage.jpg";
     import axios from "axios";
     import { useAPI } from '../../data/state';
-    import { defineEmits, ref , watch} from 'vue';
+    import {ref , watch} from 'vue';
     const APIStore = useAPI();
     const props = defineProps({
         initContent: {type:String,default:"Insert your content here"},

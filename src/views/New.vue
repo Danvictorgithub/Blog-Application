@@ -41,7 +41,7 @@
         .catch((err) => {
             if (err.response) {
                 if (err.response.status == 401) {
-                    AuthStore.setIsLoggedIn(false);
+                    AuthStore.$reset();
                     router.push(`/`);
                 }
                 error.value = err.response.data;

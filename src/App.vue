@@ -13,7 +13,7 @@
     Create WYSIWYG /
     Create Like Form /
     Create Comment Form /
-    Create ManagePost
+    Create ManagePost /
   API:
     Implement Authentication /
     Create Index /
